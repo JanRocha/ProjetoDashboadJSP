@@ -65,11 +65,8 @@
                     </ul>
                   </li>
                   
-                  <li><a href="form.html"><i class="fa fa-edit"></i> SAIR </a>
+                  <li><a href="login.jsp"><i class="fa fa-edit"></i> SAIR </a>
                   </li>
-                  
-                  
-                  
                 </ul>
               </div>
 
