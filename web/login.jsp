@@ -10,7 +10,9 @@
     <title>Gentelella Alela! | </title>
     <%@include file="head.jsp" %>
   </head>
-
+  <%
+      session.setAttribute("usuario", "");
+  %>
   <body class="login">
     <div>
       <a class="hiddenanchor" id="signup"></a>

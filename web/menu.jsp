@@ -1,4 +1,16 @@
-        <div class="col-md-3 left_col">
+<% 
+    String user = (String) session.getAttribute("usuario");
+    try{
+    if (user.equals("")){
+        response.sendRedirect("login.jsp");
+    }
+    }catch(NullPointerException e){
+        response.sendRedirect("login.jsp");
+    }
+%>
+
+
+<div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
               <a href="index.html" class="site_title"><i class="fa fa-paw"></i> 
