@@ -21,7 +21,7 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-              <form action="./Logar">
+              <form action="./Logar" method="POST">
               <h1>Sistema de gestão</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Usuário" required="" name="user" />

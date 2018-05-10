@@ -26,7 +26,7 @@ public class Logar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+         response.sendRedirect("login.jsp");
 
     }
 
@@ -48,6 +48,7 @@ public class Logar extends HttpServlet {
             if (login.equals("Jan") &&senha.equals("1234")){
                 response.sendRedirect("cliente.jsp");
                 session.setAttribute("usuario", login);
+                session.setMaxInactiveInterval(60*5);
             }else{
               response.sendRedirect("login.jsp"); 
               session.setAttribute("usuario", "");

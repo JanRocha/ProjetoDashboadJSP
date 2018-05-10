@@ -5,9 +5,7 @@
           </div>
           <div class="clearfix"></div>
         </footer>
-        <!-- /footer content -->
-      </div>
-    </div>
+        <!-- /footer content -->   
 
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
