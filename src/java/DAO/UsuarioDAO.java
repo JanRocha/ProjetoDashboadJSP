@@ -29,4 +29,36 @@ public class UsuarioDAO extends Usuario {
         return qry.getResultList();
     }
 
+    public Usuario salvar(Usuario local) {
+        EntityManager em = getEM();
+        em.getTransaction().begin();
+        em.persist(local);
+        em.getTransaction().commit();
+        em.close();
+        return local;
+    }
+
+    public Usuario selecionar(Usuario local) {
+        EntityManager em = getEM();
+        em.getTransaction().begin();
+        Usuario usu = em.find(Usuario.class, local.getId());
+        em.getTransaction().commit();
+        em.close();
+        return usu;
+    }
+
+    public Usuario update(Usuario local) {
+        EntityManager em = getEM();
+        em.getTransaction().begin();
+        Usuario usu = em.find(Usuario.class, local.getId());
+        usu.setNome(local.getNome());
+        usu.setLogin(local.getLogin());
+        usu.setSenha(local.getSenha());
+        usu.setAtivo(local.getAtivo());
+        em.merge(usu);
+        em.getTransaction().commit();
+        em.close();
+        return usu;
+    }
+
 }

@@ -48,6 +48,16 @@ public class Usuario implements Serializable {
     @Size(max = 20)
     @Column(name = "senha")
     private String senha;
+    @Column(name = "ativo")
+    private Boolean ativo;
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
 
     public Usuario() {
     }

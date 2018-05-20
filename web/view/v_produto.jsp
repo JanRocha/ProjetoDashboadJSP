@@ -50,16 +50,10 @@
                     <table id="datatable-responsive" class="table table-striped dt-responsive nowrap" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>First name</th>
-                                <th>Last name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                                <th>Extn.</th>
-                                <th>E-mail</th>
-                                <th></th>
+                                <th>ID</th>
+                                <th>Descrição</th>
+                                <th>Preço de venda</th>
+                                <th>Ativo</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,12 +73,10 @@
                             %>
                         </tbody>
                     </table>
-
-
                 </div>
-
-
-
             </div>
         </div>
-        <!-- /page content -->
+    </div>
+</div>
+
+<!-- /page content -->

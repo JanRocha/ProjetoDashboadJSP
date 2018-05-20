@@ -39,4 +39,13 @@ public class ClienteDAO extends Cliente {
         return cli;
     }
 
+    public Cliente salvar(Cliente local) {
+        EntityManager em = getEM();
+        em.getTransaction().begin();
+        em.persist(local);
+        em.getTransaction().commit();
+        em.close();
+        return local;
+    }
+
 }

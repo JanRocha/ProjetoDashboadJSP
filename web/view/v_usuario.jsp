@@ -14,7 +14,7 @@
             <div class="title_right">
                 <div class="pull-right">
                     <div class="input-group">
-                        <a href="usuarioCadastrar.jsp"><button type="button" class="btn btn-round btn-success">Cadastrar Usuario</button></a>
+                        <a href="usuarioCadastrar.jsp?action=insert"><button type="button" class="btn btn-round btn-success">Cadastrar Usuario</button></a>
                     </div>
                 </div>
             </div>
@@ -55,6 +55,7 @@
                                 <th>ID</th>
                                 <th>Nome</th>
                                 <th>Login</th>
+                                <th>Ativo</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -66,6 +67,7 @@
                                 <td><%  out.print(lstusu.get(i).getId());%></td>
                                 <td><%  out.print(lstusu.get(i).getNome());%></td>
                                 <td><%  out.print(lstusu.get(i).getLogin());%></td>
+                                <td><%  out.print(lstusu.get(i).getAtivo());%></td>
                                 <td><a href="usuarioCadastrar.jsp?action=update&id=<%= lstusu.get(i).getId()%>">
                                         <i class="fa fa-edit"></i> Editar
                                     </a></td>
