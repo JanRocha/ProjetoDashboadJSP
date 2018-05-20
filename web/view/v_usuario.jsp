@@ -1,53 +1,81 @@
-   <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Plain Page</h3>
-              </div>
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
+
+<%@page import="java.util.List"%>
+<%@page import="DAO.UsuarioDAO"%>
+<%@page import="Model.Usuario"%>
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Cadastro de Usuarios</h3>
             </div>
 
-            <div class="clearfix"></div>
+            <div class="title_right">
+                <div class="pull-right">
+                    <div class="input-group">
+                        <a href="usuarioCadastrar.jsp"><button type="button" class="btn btn-round btn-success">Cadastrar Usuario</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Plain Page</h2>
+        <div class="clearfix"></div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Clientes cadastrados</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
                     </ul>
                     <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                      PAGINA DO USUARIO ...
-                  </div>
                 </div>
-              </div>
+                <div class="x_content">
+                    <%
+                        UsuarioDAO usu = new UsuarioDAO();
+                        List<Usuario> lstusu = usu.selecionar();
+                    %>
+
+                    <table id="datatable-responsive" class="table table-striped dt-responsive nowrap" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Login</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                for (int i = 0; i < lstusu.size(); i++) {
+                            %>
+                            <tr>
+                                <td><%  out.print(lstusu.get(i).getId());%></td>
+                                <td><%  out.print(lstusu.get(i).getNome());%></td>
+                                <td><%  out.print(lstusu.get(i).getLogin());%></td>
+                                <td><a href="usuarioCadastrar.jsp?action=update&id=<%= lstusu.get(i).getId()%>">
+                                        <i class="fa fa-edit"></i> Editar
+                                    </a></td>
+                            </tr>
+                            <%                                }
+                            %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-          </div>
         </div>
-        <!-- /page content -->
+    </div>
+</div>

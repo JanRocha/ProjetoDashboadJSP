@@ -1,4 +1,4 @@
-package beans;
+package Model;
 
 public class Calculo {
     
