@@ -5,8 +5,12 @@
  */
 package Servlets;
 
+import DAO.UsuarioDAO;
+import Model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.util.List;
 import javax.jms.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,11 +26,10 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "Logar", urlPatterns = {"/Logar"})
 public class Logar extends HttpServlet {
 
-  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.sendRedirect("login.jsp");
+        response.sendRedirect("login.jsp");
 
     }
 
@@ -41,19 +44,26 @@ public class Logar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
+        try {
             String login = request.getParameter("user");
             String senha = request.getParameter("senha");
+            Usuario usu = new Usuario();
+            usu.setLogin(login);
+            usu.setSenha(senha);
+            UsuarioDAO usudao = new UsuarioDAO();
+            List<Usuario> lsusu = usudao.selecionarUsuario(usu);
+
             HttpSession session = request.getSession();
-            if (login.equals("Jan") &&senha.equals("1234")){
+            //if (login.equals("Jan") && senha.equals("1234")) {
+            if (lsusu.size() > 0) {
                 response.sendRedirect("cliente.jsp");
-                session.setAttribute("usuario", login);
-                session.setMaxInactiveInterval(60*5);
-            }else{
-              response.sendRedirect("login.jsp"); 
-              session.setAttribute("usuario", "");
+                session.setAttribute("usuario", lsusu.get(0).getNome());
+                session.setMaxInactiveInterval(60 * 5);
+            } else {
+                response.sendRedirect("login.jsp");
+                session.setAttribute("usuario", "");
             }
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
             response.sendRedirect("login.jsp");
         }
     }

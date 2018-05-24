@@ -30,6 +30,12 @@ public class ClienteDAO extends Cliente {
         return qry.getResultList();
     }
 
+    public List<Cliente> selecionarUsuario() {
+        EntityManager em = getEM();
+        Query qry = em.createQuery("SELECT u FROM Cliente u", Cliente.class);
+        return qry.getResultList();
+    }
+
     public Cliente selecionar(Cliente local) {
         EntityManager em = getEM();
         em.getTransaction().begin();

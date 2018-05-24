@@ -6,6 +6,7 @@
 package DAO;
 
 import Model.Usuario;
+import static java.lang.System.out;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -45,6 +46,17 @@ public class UsuarioDAO extends Usuario {
         em.getTransaction().commit();
         em.close();
         return usu;
+    }
+
+    public List<Usuario> selecionarUsuario(Usuario local) {
+        EntityManager em = getEM();
+        Query qry = em.createQuery("SELECT u FROM Usuario u where u.login  = :login and u.senha = :senha and u.ativo =1", Usuario.class)
+                .setParameter("login", local.getLogin())
+                .setParameter("senha", local.getSenha()
+                );
+        out.print(local.getLogin()
+        );
+        return qry.getResultList();
     }
 
     public Usuario update(Usuario local) {

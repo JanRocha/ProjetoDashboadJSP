@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 20-Maio-2018 às 05:08
+-- Generation Time: 24-Maio-2018 às 05:06
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -107,19 +107,25 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `nome` varchar(50) DEFAULT NULL,
   `login` varchar(20) DEFAULT NULL,
   `senha` varchar(20) DEFAULT NULL,
+  `ativo` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nome`, `login`, `senha`) VALUES
-(1, 'JANAILSON', 'JAN', '1234'),
-(2, 'RAFAEL', 'RAFAEL', '1234'),
-(3, 'GUSTAVO', 'GUSTAVO', '1234'),
-(4, 'LUIZ', 'LUIZ', '1234'),
-(5, 'MAURICIO', 'MAURICIO', '1234');
+INSERT INTO `usuario` (`id`, `nome`, `login`, `senha`, `ativo`) VALUES
+(1, 'JANAILSON ROCHA DE SOUSA', 'JAN', '1234', 1),
+(2, 'RAFAEL', 'RAFAEL', '1234', 1),
+(3, 'GUSTAVO', 'GUSTAVO', '1234', 1),
+(4, 'LUIZ', 'LUIZ', '1234', 1),
+(5, 'MAURICIO', 'MAURICIO', '1234', 1),
+(6, 'PAULO', 'PAULO', '1234', 0),
+(7, 'JAMILE SILVA', 'SILVA', '1234', 0),
+(8, 'VICTORIA', 'VIC', '123', 0),
+(9, 'HIAGO', 'HIAGO', '1234', 0),
+(10, 'JOANA', 'JOANA', '1234', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
