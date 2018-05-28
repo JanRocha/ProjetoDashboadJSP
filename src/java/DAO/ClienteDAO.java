@@ -53,5 +53,20 @@ public class ClienteDAO extends Cliente {
         em.close();
         return local;
     }
+    public Cliente update(Cliente local) {
+        EntityManager em = getEM();
+        em.getTransaction().begin();
+        Cliente cli = em.find(Cliente.class, local.getId());
+        cli.setNome(local.getNome());
+        cli.setSobreNome(local.getSobreNome());
+        cli.setCep(local.getCep());
+        cli.setLogradouro(local.getLogradouro());
+        cli.setAniversario(local.getAniversario());
+        cli.setAtivo(local.getAtivo());
+        em.merge(cli);
+        em.getTransaction().commit();
+        em.close();
+        return cli;
+    }
 
 }

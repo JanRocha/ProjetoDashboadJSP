@@ -12,7 +12,7 @@
             <div class="title_right">
                 <div class="pull-right">
                     <div class="input-group">
-                        <a href="produtoCadastrar.jsp"><button type="button" class="btn btn-round btn-success">Cadastrar produto</button></a>
+                        <a href="produtoCadastrar.jsp?action=insert"><button type="button" class="btn btn-round btn-success">Cadastrar produto</button></a>
                     </div>
                 </div>
             </div>

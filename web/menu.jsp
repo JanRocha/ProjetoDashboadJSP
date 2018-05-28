@@ -20,6 +20,7 @@
         <div class="clearfix"></div>
 
         <!-- menu profile quick info -->
+        
         <div class="profile clearfix">
             <div class="profile_pic">
                 <img src="images/img.jpg" alt="..." class="img-circle profile_img">
@@ -76,6 +77,7 @@
             </div>
 
             <ul class="nav navbar-nav navbar-right">
+                
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <img src="images/img.jpg" alt=""><% out.print(session.getAttribute("usuario"));%>
@@ -93,7 +95,13 @@
                         <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                     </ul>
                 </li>
-
+                <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                 
+                    <span class="badge bg-green">Minha cesta 10</span>
+                  </a>                  
+                  </ul>
+                </li>
 
         </nav>
     </div>

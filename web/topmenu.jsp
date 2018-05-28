@@ -17,6 +17,8 @@
             </div>
 
             <ul class="nav navbar-nav navbar-right">
+               
+                
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <img src="images/img.jpg" alt=""><%= user%>
@@ -33,9 +35,6 @@
                         <li><a href="javascript:;">Help</a></li>
                         <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                     </ul>
-                </li>
-
-
                 </li>
             </ul>
         </nav>

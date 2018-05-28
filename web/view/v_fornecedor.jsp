@@ -12,8 +12,8 @@
 
             <div class="title_right">
                 <div class="pull-right">
-                    <div class="input-group">
-                        <a href="fornecedorCadastrar.jsp"<button type="button" class="btn btn-round btn-success">Cadastrar fornecedor</button></a>
+                    <div class="input-group">                         
+                        <a href="fornecedorCadastrar.jsp?action=insert"><button type="button" class="btn btn-round btn-success">Cadastrar fornecedor</button></a>
                     </div>
                 </div>
             </div>

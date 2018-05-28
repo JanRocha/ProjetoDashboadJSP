@@ -38,5 +38,24 @@ public class FornecedorDAO extends Fornecedor {
         em.close();
         return cli;
     }
+    public Fornecedor salvar(Fornecedor local) {
+        EntityManager em = getEM();
+        em.getTransaction().begin();
+        em.persist(local);
+        em.getTransaction().commit();
+        em.close();
+        return local;
+    }
+    public Fornecedor update(Fornecedor local) {
+        EntityManager em = getEM();
+        em.getTransaction().begin();
+        Fornecedor fornecedor = em.find(Fornecedor.class, local.getId());
+        fornecedor.setRazaoSocial(local.getRazaoSocial());       
+        fornecedor.setAtivo(local.getAtivo());
+        em.merge(fornecedor);
+        em.getTransaction().commit();
+        em.close();
+        return fornecedor;
+    }
 
 }

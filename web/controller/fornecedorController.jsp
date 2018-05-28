@@ -14,36 +14,33 @@
     </body>
 </html>
 --%>
-<%@page import="Model.Usuario"%>
-<%@page import="DAO.UsuarioDAO"%>
+<%@page import="Model.Fornecedor"%>
+<%@page import="DAO.FornecedorDAO"%>
 <%  try {
         String action = request.getParameter("action");
-        String nome = request.getParameter("nome");
-        String id = request.getParameter("id");
-        String login = request.getParameter("login");
-        String senha = request.getParameter("senha");
-        String confiSenha = request.getParameter("confSenha");
+        String razao = request.getParameter("razao");
+        String id = request.getParameter("id");        
         String ativo = "false";
         ativo = request.getParameter("ativo");
         //out.print(ativo);
-        UsuarioDAO usudao = new UsuarioDAO();
-        Usuario usu = new Usuario();
+        FornecedorDAO fornecedorDAO = new FornecedorDAO();
+        Fornecedor fornecedor = new Fornecedor();
 
-        usu.setNome(nome);
-        usu.setLogin(login);
-        usu.setSenha(senha);
+        fornecedor.setRazaoSocial(razao);
+   
+        
         if (ativo != null) {
-            usu.setAtivo(true);
+            fornecedor.setAtivo(true);
         } else {
-            usu.setAtivo(false);
+            fornecedor.setAtivo(false);
         }
         if (action.equals("insert")) {
-            usu = usudao.salvar(usu);
+            fornecedor = fornecedorDAO.salvar(fornecedor);
         } else {
-            usu.setId(Integer.parseInt(id));
-            usu = usudao.update(usu);
+            fornecedor.setId(Integer.parseInt(id));
+            fornecedor = fornecedorDAO.update(fornecedor);
         }
-        response.sendRedirect("../usuario.jsp");
+        response.sendRedirect("../fornecedor.jsp");
 
     } catch (Exception e) {
         out.print(e.getMessage());

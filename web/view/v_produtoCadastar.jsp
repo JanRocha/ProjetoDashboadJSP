@@ -1,3 +1,42 @@
+<%@page import="DAO.ProdutoDAO"%>
+<%@page import="Model.Produto"%>
+<script>
+    function validar() {
+   
+            document.form.submit();
+      
+    }
+
+<%
+    String action = "";
+    String idProd = "";     
+    String descricao = "";     
+    Float preco =0f;     
+    Boolean ativo = true;
+    Produto prod = new Produto();
+    ProdutoDAO prodDAO = new ProdutoDAO();
+    try {
+        action = request.getParameter("action");
+        idProd = request.getParameter("id");
+        if (!idProd.equals("")) {
+            prod.setId(Integer.parseInt(idProd));
+            prod = prodDAO.selecionar(prod);
+            idProd = prod.getId().toString();             
+            descricao = prod.getDescricao();             
+            preco =  prod.getPrecoVenda();             
+            ativo = prod.getAtivo();
+        }
+
+    } catch (Exception e) {
+    }
+
+    //request.setAttribute("action", action);
+    //request.setAttribute("idUsuario", idUsuario);
+    //out.print(action);
+    //out.print(idUsuario);
+%>
+
+</script>
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="">
@@ -25,45 +64,39 @@
                     </div>
                     <div class="x_content">
                         <br>
-                        <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                        <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate=""onsubmit="return validar()" method="POST" action="controller/clienteController.jsp">
 
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nome <span class="required">*</span>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descricao">Descrição <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="nome" required="required" class="form-control col-md-7 col-xs-12">
+                                    <input type="text" id="descricao" name="descricao" required="required" class="form-control col-md-7 col-xs-12" value="<%= descricao %>">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sobre_nome">Sobre nome <span class="required">*</span>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="preco">Preço de venda<span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="sobre_nome" name="sobre_nome" required="required" class="form-control col-md-7 col-xs-12">
+                                    <input type="text" id="preco" name="preco" required="required" class="form-control col-md-7 col-xs-12"value="<%= preco %>">
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Data de nascimento <span class="required">*</span>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ativo">Ativo <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="aniversario" class="date-picker form-control col-md-7 col-xs-12" required="required" type="date">
+                                    <% if (ativo == true) {%>
+                                    <input type="checkbox" id="ativo" name="ativo" value="true" checked required="required" class="checkbox col-md-7 col-xs-12" >
+                                    <% } else {%>
+                                    <input type="checkbox" id="ativo" name="ativo"  value="true" required="required" class="checkbox col-md-7 col-xs-12">
+                                    <% }%>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CEP">CEP<span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="CEP" name="CEP" required="required" class="form-control col-md-7 col-xs-12">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Logradouro">Logradouro <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="Logradouro" name="Logradouro" required="required" class="form-control col-md-7 col-xs-12">
-                                </div>
-                            </div>
-                            <div class="ln_solid"></div>
+                            <% if (action.equals("insert")) { %>
+                            <input type="hidden" name="action" value="insert"/>
+                            <%} else {%>
+                            <input type="hidden" name="action" value="update"/>
+                            <%}%>
+                            <input type="hidden" name="id" value="<%= idProd %>"/>
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                     <button class="btn btn-primary" type="button"onclick="window.history.go(-1)">Cancelar</button>

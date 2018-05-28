@@ -1,3 +1,49 @@
+<%@page import="DAO.ClienteDAO"%>
+<%@page import="Model.Cliente"%>
+<%@page import="java.util.Date;"%>
+<script>
+    function validar() {
+   
+            document.form.submit();
+      
+    }
+
+<%
+    String action = "";
+    String idCli= "";     
+    String nome = "";     
+    String Sobrenome = "";     
+    String cep = "";     
+    String logradouro = "";    
+    Date aniversario = new Date();
+    Boolean ativo = true;
+    Cliente cli = new Cliente();
+    ClienteDAO cliDAO = new ClienteDAO();
+ 
+    try {
+        action = request.getParameter("action");
+        idCli = request.getParameter("id");
+        if (!idCli.equals("")) {
+            cli.setId(Integer.parseInt(idCli));
+            cli = cliDAO.selecionar(cli);
+            idCli = cli.getId().toString();             
+            nome = cli.getNome();             
+            Sobrenome =  cli.getSobreNome();
+            cep = cli.getCep();
+            logradouro =cli.getLogradouro();
+            aniversario = cli.getAniversario();
+            ativo = cli.getAtivo();
+        }
+
+    } catch (Exception e) {
+    }
+
+    //request.setAttribute("action", action);
+    //request.setAttribute("idUsuario", idUsuario);
+    //out.print(action);
+    //out.print(idUsuario);
+%>
+    </script>
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="">
@@ -25,20 +71,20 @@
                     </div>
                     <div class="x_content">
                         <br>
-                        <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                        <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" onsubmit="return validar()" method="POST" action="controller/clienteController.jsp">
 
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nome <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="nome" required="required" class="form-control col-md-7 col-xs-12">
+                                    <input type="text" id="nome" required="required" class="form-control col-md-7 col-xs-12" name="nome"value="<%= nome%>">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sobre_nome">Sobre nome <span class="required">*</span>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sobrenome">Sobre nome <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="sobre_nome" name="sobre_nome" required="required" class="form-control col-md-7 col-xs-12">
+                                    <input type="text" id="sobre_nome" name="sobrenome" required="required" class="form-control col-md-7 col-xs-12" value="<%= Sobrenome%>">
                                 </div>
                             </div>
 
@@ -46,23 +92,40 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Data de nascimento <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="aniversario" class="date-picker form-control col-md-7 col-xs-12" required="required" type="date">
+                                    <input id="aniversario" class="date-picker form-control col-md-7 col-xs-12" required="required" type="date" name="aniversario"value="<%= aniversario%>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CEP">CEP<span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="CEP" name="CEP" required="required" class="form-control col-md-7 col-xs-12">
+                                    <input type="number" id="CEP" name="cep" required="required" class="form-control col-md-7 col-xs-12" value="<%= cep%>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Logradouro">Logradouro <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="Logradouro" name="Logradouro" required="required" class="form-control col-md-7 col-xs-12">
+                                    <input type="text" id="Logradouro" name="logradouro" required="required" class="form-control col-md-7 col-xs-12" value="<%= logradouro%>">
                                 </div>
                             </div>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ativo">Ativo <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <% if (ativo == true) {%>
+                                    <input type="checkbox" id="ativo" name="ativo" value="true" checked required="required" class="checkbox col-md-7 col-xs-12" >
+                                    <% } else {%>
+                                    <input type="checkbox" id="ativo" name="ativo"  value="true" required="required" class="checkbox col-md-7 col-xs-12">
+                                    <% }%>
+                                </div>
+                            </div>
+                            <% if (action.equals("insert")) { %>
+                            <input type="hidden" name="action" value="insert"/>
+                            <%} else {%>
+                            <input type="hidden" name="action" value="update"/>
+                            <%}%>
+                            <input type="hidden" name="id" value="<%= idCli%>"/>
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
