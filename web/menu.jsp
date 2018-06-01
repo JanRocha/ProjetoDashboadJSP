@@ -1,11 +1,28 @@
+<%@page import="Model.Cliente"%>
+<%@page import="DAO.ClienteDAO"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.text.DecimalFormatSymbols"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%
     String user = (String) session.getAttribute("usuario");
+    ArrayList lista = null;
+    String lstItem;
+    String Item[];
     try {
         if (user.equals("")) {
             response.sendRedirect("login.jsp");
         }
     } catch (NullPointerException e) {
         response.sendRedirect("login.jsp");
+    }
+    if (session.getAttribute("itens") != null){
+        lista = new ArrayList();
+        lista =(ArrayList) session.getAttribute("itens");
+
+       
     }
 %>
 
@@ -58,13 +75,7 @@
                     </li>
                 </ul>
             </div>
-
-        </div>
-        <!-- /sidebar menu -->
-
-        <!-- /menu footer buttons -->
-
-        <!-- /menu footer buttons -->
+        </div>   
     </div>
 </div>
 
@@ -76,8 +87,7 @@
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </div>
 
-            <ul class="nav navbar-nav navbar-right">
-                
+            <ul class="nav navbar-nav navbar-right">                
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <img src="images/img.jpg" alt=""><% out.print(session.getAttribute("usuario"));%>
@@ -97,13 +107,96 @@
                 </li>
                 <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                 
-                    <span class="badge bg-green">Minha cesta 10</span>
-                  </a>                  
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green"><%if (lista != null)out.print(lista.size());%></span>
+                  </a                 
+                </li>              
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                       <%                         
+                           if (lista != null){
+                            Iterator i = lista.iterator();
+                                while ( i.hasNext()){
+                                    lstItem = i.next().toString();
+                                    Item = lstItem.split(";"); 
+                                    NumberFormat formato = NumberFormat.getCurrencyInstance();
+                        %>
+                    <li>
+                        <a>
+                            <span>Descrição: <%=Item[0]%></span>
+                            <p>
+                                <span>Vlr unit: <%=formato.format(Double.parseDouble(Item[2]))%> </span>
+                                <span>Qtde: <%=Item[3]%> </span>
+                                <span class="time">Total: <%=formato.format(Double.parseDouble(Item[4]))%> </span>
+                            </p>                          
+                        </a>
+                    </li>
+                    <%
+                          
+                                }
+                            }
+                          
+                        %>
+                    <li>
+                      <div class="text-center">
+                          <%                         
+                           if (lista != null){
+                               %>
+                           
+                        <a data-toggle="modal" data-target="#modal-mensagem">
+                          <strong>Finalizar pedido</strong>                        
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                               <%}%>
+                      </div>
+                    </li>
                   </ul>
                 </li>
-
+            </ul>
         </nav>
     </div>
 </div>
+<div class="modal fade" id="modal-mensagem">
+    <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal"><span>x</span></button>
+                 <h4 class="modal-title">Selecione o cliente</h4>                 
+             </div>
+             <div class="modal-body">
+                  <%
+                        ClienteDAO cl = new ClienteDAO();
+                        List<Cliente> lstcl = cl.selecionar();
+                    %>
+
+                    <table id="datatable-responsive" class="table table-striped dt-responsive nowrap" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>                           
+                                <th></th>                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                for (int i = 0; i < lstcl.size(); i++) {
+                            %>                           
+                              
+                            </td>
+
+                                <td>
+                                    <a href="finalizarPedido.jsp?id=<%= lstcl.get(i).getId()%>&nome= <%  out.print(lstcl.get(i).getNome());%>">
+                                        
+                                     <%  out.print(lstcl.get(i).getNome());%>
+                                    </a>
+                                </td>
+                            </tr>
+                            <% }
+                            %>
+                        </tbody>
+                    </table>             
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+             </div>
+         </div>
+     </div>
+ </div>
 <!-- /top navigation -->
