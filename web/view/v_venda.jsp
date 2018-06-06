@@ -6,33 +6,7 @@
 <%@page import="DAO.pedido"%>
 
  <%          
-    String codigo;
-    String qtde;
-    String descricao;
-    String preco;
-    codigo = request.getParameter("id");
-    qtde = request.getParameter("qtde");    
-    descricao = request.getParameter("descricao");    
-    preco = request.getParameter("preco"); 
   
-   
-    try {
-            
-       ArrayList arr = new ArrayList();
-        if (session.getAttribute("itens") != null){
-            arr =(ArrayList) session.getAttribute("itens");
-            //out.print(arr.toString());
-        }
-        double dPreco = Double.parseDouble(preco);
-        double dqtde= Double.parseDouble(qtde);
-        double dTotal= dPreco * dqtde;
-        arr.add(descricao+";"+codigo+";"+preco+";"+qtde+";"+dTotal);
-        session.setAttribute("itens", arr);
-        //out.print(arr.toString());
-     } catch (Exception e) {
-         out.print(e.getMessage());
-     }
-        
  
 %>
 
@@ -61,7 +35,7 @@
                                 <p>Descrição:</p>                              
                                 <h2> <% out.print(lstpro.get(i).getDescricao());%></h2>
                                 <h2>Preço <% out.print(lstpro.get(i).getPrecoVenda());%></h2>
-                                <form method="POST">
+                                <form method="POST" action="ProcessaItem.jsp">
                                     <input type="hidden" name="id" value="<%= lstpro.get(i).getId()%>"/>
                                     <input type="hidden" name="descricao" value="<%= lstpro.get(i).getDescricao()%>"/>
                                     <input type="hidden" name="preco" value="<%= lstpro.get(i).getPrecoVenda()%>"/>

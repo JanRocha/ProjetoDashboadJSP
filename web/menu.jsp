@@ -11,6 +11,7 @@
     ArrayList lista = null;
     String lstItem;
     String Item[];
+    Integer indice= -1;
     try {
         if (user.equals("")) {
             response.sendRedirect("login.jsp");
@@ -20,9 +21,7 @@
     }
     if (session.getAttribute("itens") != null){
         lista = new ArrayList();
-        lista =(ArrayList) session.getAttribute("itens");
-
-       
+        lista =(ArrayList) session.getAttribute("itens");       
     }
 %>
 
@@ -60,6 +59,7 @@
                     <li><a><i class="fa fa-home"></i> Venda <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="venda.jsp">Venda</a></li>
+                            <li><a href="relatorioPedidos.jsp">Relatório de pedidos</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-edit"></i> Cadastro <span class="fa fa-chevron-down"></span></a>
@@ -112,30 +112,31 @@
                   </a                 
                 </li>              
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                       <%                         
-                           if (lista != null){
-                            Iterator i = lista.iterator();
-                                while ( i.hasNext()){
-                                    lstItem = i.next().toString();
-                                    Item = lstItem.split(";"); 
-                                    NumberFormat formato = NumberFormat.getCurrencyInstance();
-                        %>
-                    <li>
-                        <a>
-                            <span>Descrição: <%=Item[0]%></span>
-                            <p>
-                                <span>Vlr unit: <%=formato.format(Double.parseDouble(Item[2]))%> </span>
-                                <span>Qtde: <%=Item[3]%> </span>
-                                <span class="time">Total: <%=formato.format(Double.parseDouble(Item[4]))%> </span>
-                            </p>                          
-                        </a>
+                    <%                         
+                        if (lista != null){
+                         Iterator i = lista.iterator();
+
+                             while ( i.hasNext()){
+                                 lstItem = i.next().toString();
+                                 Item = lstItem.split(";"); 
+                                 NumberFormat formato = NumberFormat.getCurrencyInstance();
+                               indice += 1 ;  
+                     %>
+                    <li>                     
+                        <span>Descrição: <%=Item[0]%></span>
+                        <p>
+                            <span>Vlr unit: <%=formato.format(Double.parseDouble(Item[2]))%> </span>
+                            <span>Qtde: <%=Item[3]%> </span>
+                            <span class="">Total: <%=formato.format(Double.parseDouble(Item[4]))%> </span>
+                            <a href="excluirPedido.jsp?indice=<%=indice%>">
+                                <span class="time red bold">X</span>
+                            </a>
+                        </p>  
                     </li>
-                    <%
-                          
-                                }
+                    <%                          
                             }
-                          
-                        %>
+                        }
+                    %>
                     <li>
                       <div class="text-center">
                           <%                         
@@ -182,7 +183,7 @@
                             </td>
 
                                 <td>
-                                    <a href="finalizarPedido.jsp?id=<%= lstcl.get(i).getId()%>&nome= <%  out.print(lstcl.get(i).getNome());%>">
+                                    <a href="finalizar.jsp?id=<%= lstcl.get(i).getId()%>&nome= <%  out.print(lstcl.get(i).getNome());%>">
                                         
                                      <%  out.print(lstcl.get(i).getNome());%>
                                     </a>

@@ -58,6 +58,7 @@ public class Logar extends HttpServlet {
             if (lsusu.size() > 0) {
                 response.sendRedirect("cliente.jsp");
                 session.setAttribute("usuario", lsusu.get(0).getNome());
+                session.setAttribute("id_usuario", lsusu.get(0).getId().toString());
                 session.setMaxInactiveInterval(60 * 5);
             } else {
                 response.sendRedirect("login.jsp");
