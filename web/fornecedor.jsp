@@ -9,7 +9,8 @@
             <div class="main_container">
                 <%@include file="menu.jsp"%>         
                 <%@include file="view/v_fornecedor.jsp"%>
-                <%@include file="footer.jsp"%>               
+                <%@include file="footer.jsp"%>   
+                <%@include file="script.jsp"%>
             </div>
         </div>
     </body>

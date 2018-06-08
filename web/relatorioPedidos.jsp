@@ -10,6 +10,7 @@
                 <%@include file="menu.jsp"%>
                 <%@include file="view/v_relatorioPedidos.jsp"%>
                 <%@include file="footer.jsp"%>
+                <%@include file="script.jsp"%>
             </div>
         </div>
     </body>

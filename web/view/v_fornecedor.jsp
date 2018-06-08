@@ -1,4 +1,4 @@
-<%@page import="Model.Fornecedor"%>
+ <%@page import="Model.Fornecedor"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
 <%@page import="DAO.FornecedorDAO"%>
@@ -48,7 +48,7 @@
                         List<Fornecedor> lsforn = forn.selecionar();
                     %>
 
-                    <table id="datatable-responsive" class="table table-striped dt-responsive nowrap" cellspacing="0" width="100%">
+                    <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -74,11 +74,18 @@
                         </tbody>
                     </table>
 
-
                 </div>
-
-
-
+                </div>
             </div>
         </div>
-        <!-- /page content -->
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').dataTable({
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
+            }
+        });
+    });
+</script>

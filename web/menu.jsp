@@ -29,7 +29,7 @@
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i>
+            <a href="venda.jsp" class="site_title"><i class="fa fa-paw"></i>
                 <span>Sistema Gestão/Venda</span></a>
         </div>
 
@@ -38,12 +38,11 @@
         <!-- menu profile quick info -->
         
         <div class="profile clearfix">
-            <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
-            </div>
+           
             <div class="profile_info">
-                <span>Bem Vindo,</span>
+                <span>Bem Vindo,
                 <h2><% out.print(session.getAttribute("usuario"));%></h2>
+                             
             </div>
             <div class="clearfix"></div>
         </div>
@@ -90,24 +89,14 @@
             <ul class="nav navbar-nav navbar-right">                
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img src="images/img.jpg" alt=""><% out.print(session.getAttribute("usuario"));%>
+                       <% out.print(session.getAttribute("usuario"));%>
                         <span class=" fa fa-angle-down"></span>
                     </a>
-                    <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        <li><a href="javascript:;"> Profile</a></li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="badge bg-red pull-right">50%</span>
-                                <span>Settings</span>
-                            </a>
-                        </li>
-                        <li><a href="javascript:;">Help</a></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                    </ul>
+                    
                 </li>
                 <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
+                      <img src="images/carrinho.png" width="30px" height="30px"> 
                     <span class="badge bg-green"><%if (lista != null)out.print(lista.size());%></span>
                   </a                 
                 </li>              

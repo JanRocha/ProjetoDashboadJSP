@@ -11,6 +11,7 @@
                 <%@include file="menu.jsp"%>
                 <%@include file="content.jsp"%>
                 <%@include file="footer.jsp"%>
+                <%@include file="script.jsp"%>
     
             </body>
 </html>

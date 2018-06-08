@@ -34,7 +34,7 @@
                     }        
                 %>
 
-                    <table id="datatable-responsive" class="table table-striped dt-responsive nowrap" cellspacing="0" width="100%">
+                    <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Codigo</th>
@@ -69,7 +69,7 @@
                     <div class="title_right">
                     <div class="pull-right">
                         <div class="input-group">
-                            <a href="finalizarPedido.jsp?action=finalizar&id_u=<%= id %>"><button type="button" class="btn btn-round btn-success">Finalizar</button></a>
+                            <a href="finalizarPedido.jsp?action=finalizar&id_u=<%= id %>"><br><button type="button" class="btn btn-round btn-success">Finalizar</button></a>
                         </div>
                     </div>
                 </div>
@@ -77,4 +77,12 @@
         </div>
     </div>
 </div>
-    <!-- /page content -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').dataTable({
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
+            }
+        });
+    });
+</script>

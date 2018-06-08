@@ -47,7 +47,7 @@
                         List<Cliente> lstcli = cli.selecionar();
                     %>
 
-                    <table id="datatable-responsive" class="table table-striped dt-responsive nowrap" cellspacing="0" width="100%">
+                     <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -84,4 +84,15 @@
             </div>
         </div>
     </div>
+</div>                       
     <!-- /page content -->
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').dataTable({
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
+            }
+        });
+    });
+</script>
